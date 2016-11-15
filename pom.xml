@@ -15,6 +15,20 @@
             <artifactId>selenide</artifactId>
             <version>4.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+
     </dependencies>
 
 </project>
