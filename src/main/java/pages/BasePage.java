@@ -2,16 +2,19 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public abstract class BasePage {
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
-        protected SelenideElement $(String locator){
+        public static SelenideElement $(String locator){
             return com.codeborne.selenide.Selenide.$(getByFromString(locator));
         }
 
-        private By getByFromString(String xpathOrCss){
+        public static By getByFromString(String xpathOrCss){
             return !xpathOrCss.startsWith("//")
                     && !xpathOrCss.startsWith(".//")
                     && !xpathOrCss.startsWith("(//")
