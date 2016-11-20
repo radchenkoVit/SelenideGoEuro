@@ -1,28 +1,34 @@
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
-import org.testng.Assert;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
-import pages.ResultPage;
-import pages.SearchPage;
+import pages.resultPage.ResultPage;
+import pages.searchPage.Hotel;
+import pages.searchPage.SearchPage;
+
+import static pages.resultPage.TransportMode.*;
 
 public class BaseTest {
+    private static String fromCity = "Berlin";
+    private static String toCity = "Cologne";
+    private static int expectedResultQuantity = 10;
+    private String url = "http://www.goeuro.com/";
+
 
     @BeforeSuite
     public void setUp(){
         FirefoxDriverManager.getInstance().setup();
     }
 
-    private String url = "http://www.goeuro.com/";
-
     @Test
-    public void test(){
+    public void searchTest(){
         SearchPage searchPage = new SearchPage();
-        searchPage.open(url)
-                .typeFromCity("Berlin").selectCity("Berlin")
-                .typeToCity("Cologne").selectCity("Cologne")
+
+        ResultPage resultPage = searchPage.open(url)
+                .unsSelectHotel(Hotel.AirBnb)
+                .typeFromCity(fromCity).selectCity(fromCity)
+                .typeToCity(toCity).selectCity(toCity)
                 .search();
 
-        ResultPage resultPage = new ResultPage();
-        Assert.assertTrue(resultPage.isOpened(), "Result Page is not opened");
+        resultPage.shouldBeResults(Flight, expectedResultQuantity);
     }
 }
