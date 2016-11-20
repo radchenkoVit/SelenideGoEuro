@@ -7,7 +7,7 @@ import pages.searchPage.SearchPage;
 
 import static pages.resultPage.TransportMode.*;
 
-public class BaseTest {
+public class SmokeTest {
     private static String fromCity = "Berlin";
     private static String toCity = "Cologne";
     private static int expectedResultQuantity = 10;

@@ -16,7 +16,10 @@ public class ResultPage extends BasePage {
     }
 
     public ResultPage selectMode(TransportMode transportMode){
-        $(transportMode.getLocator()).click(); return this;
+        $(transportMode.getLocator())
+                .waitUntil(Condition.appear, Waiting.MIDDLE)
+                .click();
+        return this;
     }
 
     public ResultPage shouldBeResults(int quantity){
@@ -33,6 +36,7 @@ public class ResultPage extends BasePage {
     }
 
     public ResultPage shouldBeResults(TransportMode transportMode, int quantity){
+        logger.info(String.format("Verify result present for transport mode: %s, quantity: %d ", transportMode, quantity));
         selectMode(transportMode);
         $(resultBlockLocator).waitUntil(Condition.visible, Waiting.LONG);
         $$(getByFromString(resultBlockLocator)).filter(Condition.visible).shouldHaveSize(quantity);
